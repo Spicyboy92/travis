@@ -1,1 +1,39 @@
-<project name="Test" basedir="." default="main">
+<?xml version="1.0"?>
+<project name="Calculator.java" default="main" basedir=".">
+
+    <property name="src.dir" location="travis" />
+    <property name="build.dir" location="travis" />
+    <property name="dist.dir" location="travis" />
+    <property name="docs.dir" location="travis" />
+    <property name="test.dir" location="../junit/simple/junit-platform-console-standalone-1.2.0.jar" />
+    
+<target name="clean">
+    <delete dir="${build.dir}" />
+    <delete dir="${docs.dir}" />
+    <delete dir="${dist.dir}" />
+</target>
+
+<!-- Creates the build, docs and dist directory-->
+
+<target name="makedir">
+    <mkdir dir="${build.dir}" />
+    <mkdir dir="${docs.dir}" />
+    <mkdir dir="${dist.dir}" />
+</target>
+
+<target name="compile" depends="clean, makedir">
+    <javac srcdir="${src.dir}" destdir="${build.dir}">
+    </javac>
+
+</target>
+
+<target name="junit" depends="compile">
+    <junit printsummary="on" fork="true" haltonfailure="yes">
+        <classpath refid="junit.class.path" />
+        <formatter type="plain" />
+        <batchtest todir="${test.report.dir}">
+        </batchtest>
+        </junit>
+        </target>
+        </project>
+
